@@ -1,13 +1,23 @@
 {
   "name": "emellib",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
   "homepage": "https://www.crejo.fun/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/INF800/emellib.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "machine learning",
+    "computer vision",
+    "real time",
+    "motion detection",
+    "face detection"
+  ],
+  "author": "Rakesh Asapanna <rakesh@v.crejo.fun>",
   "license": "ISC",
   "description": ""
 }
