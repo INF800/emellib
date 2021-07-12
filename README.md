@@ -39,3 +39,5 @@ const id = window.setInterval(() => {
     detect()
 }, 32);
 ```
+
+Temporary template can be found [here](https://codesandbox.io/s/hidden-river-pqm5r) in codesandbox
