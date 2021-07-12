@@ -2,7 +2,7 @@
 
 Property of Crejo.Fun
 
-### Motion Detection
+### 1. Motion Detection
 
 ```js
 // create getter.
@@ -18,5 +18,24 @@ const getEnergyScore = ml.motionDetector.createEnergyScoreGetter({
 const id = window.setInterval(() => {
     const score = getEnergyScore()
     console.log('score:', score)
+}, 32);
+```
+
+See full template for react app [here](https://codesandbox.io/s/wispy-frost-lyx4p) in codesandbox.
+
+### 2. Haar Cascade Detection
+
+**Note:** This implementation needs to be optimized
+
+```js
+// create getter.
+const detect = ml.haarDetector.createHaarDetector({
+    videoElement: webcamVideo.current, // localstream should be playing here
+    canvasElementDisplay: canvasDispaly.current // for display only
+})
+
+// inside setInterval
+const id = window.setInterval(() => {
+    detect()
 }, 32);
 ```
