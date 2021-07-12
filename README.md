@@ -1,6 +1,6 @@
 ## ML Library
 
-Property of Crejo.Fun
+Maintained by Crejo.Fun
 
 ### 1. Motion Detection
 
