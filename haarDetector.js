@@ -6,12 +6,13 @@ export const createHaarDetector = (args) => {
     // ----
     //  videoElement
     //  canvasElementDisplay
+
+    const detector = new HAAR.Detector(faceHaardata)
+
     return () => {
         args.canvasElementDisplay.width = args.videoElement.offsetWidth;
         args.canvasElementDisplay.height = args.videoElement.offsetHeight;
-
         const ctx = args.canvasElementDisplay.getContext('2d');
-        const detector = new HAAR.Detector(faceHaardata)
 
         detector
             .image(args.videoElement, 1) // todo: remove `document.create ...`

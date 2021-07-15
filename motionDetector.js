@@ -70,7 +70,7 @@ export const createEnergyScoreGetter = (args) => {
             ctxFinal.putImageData(imgData, 0, 0);
         }
 
-        return energyScore
+        return energyScore / (args.canvasElementHelper.width * args.canvasElementDisplay.height * 4)
     }
 
 }
