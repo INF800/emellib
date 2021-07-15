@@ -63,14 +63,16 @@ export const createEnergyScoreGetter = (args) => {
         }
 
         // total black pixels
-        const energyScore = (imgData.data.length - utils.countOccurrences(imgData.data, 255)) / 100;
-        // energyConsole.innerText = energyScore
+        // const energyScore = (imgData.data.length - utils.countOccurrences(imgData.data, 255)) / 100;
+
+        // normalized black pixels
+        const energyScore = utils.clamp((1 - (utils.countOccurrences(imgData.data, 255) / imgData.data.length)) * 2200, 0, 100);
 
         if (ctxFinal) {
             ctxFinal.putImageData(imgData, 0, 0);
         }
 
-        return energyScore / (args.canvasElementHelper.width * args.canvasElementDisplay.height * 4)
+        return energyScore
     }
 
 }

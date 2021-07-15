@@ -1,4 +1,5 @@
+//import * as haarDetector from './haarDetector'
 import * as motionDetector from './motionDetector'
-import * as haarDetector from './haarDetector'
 
-export { motionDetector, haarDetector }
+// export { motionDetector, haarDetector }
+export { motionDetector }
