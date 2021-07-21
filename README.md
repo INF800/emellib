@@ -23,7 +23,22 @@ const id = window.setInterval(() => {
 
 See full template for react app [here](https://codesandbox.io/s/wispy-frost-lyx4p) in codesandbox.
 
-### 2. Haar Cascade Detection
+### 2. Body Detection
+```js
+
+// load detector. takes time.
+const detector = await ml.poseDetector.createDetector(webcamVideo.current);
+
+....
+
+// inside setinterval
+const isCorrectFrame = await ml.poseDetector.isBodyInFrame(detector, webcamVideo.current);
+```
+
+See full template for react app [here](https://codesandbox.io/s/competent-bhabha-wh3hv?file=/src/App.js) in codesandbox.
+
+
+### 3. Haar Cascade Detection
 
 **Note:** This implementation needs to be optimized
 
