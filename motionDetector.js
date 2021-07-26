@@ -17,7 +17,7 @@ export const createEnergyScoreGetter = (args) => {
     let _isFirstTimeCall = true
     let curMoment=0;
 
-    return () => {
+    return (decay=0.9) => {
         args.canvasElementHelper.width = args.videoElement.offsetWidth;
         args.canvasElementHelper.height = args.videoElement.offsetHeight;
         const ctx = args.canvasElementHelper.getContext('2d');
@@ -77,7 +77,7 @@ export const createEnergyScoreGetter = (args) => {
         // return energyScore
         
         // smooth using momentum
-        curMoment = ((1-0.9)*energyScore) + (0.9*curMoment)
+        curMoment = ((1-decay)*energyScore) + (decay*curMoment)
         return curMoment
 
     }
