@@ -15,6 +15,7 @@ export const createEnergyScoreGetter = (args) => {
     let thresh = args.thresh
     let alpha = args.alpha;
     let _isFirstTimeCall = true
+    let curMoment=0;
 
     return () => {
         args.canvasElementHelper.width = args.videoElement.offsetWidth;
@@ -72,7 +73,13 @@ export const createEnergyScoreGetter = (args) => {
             ctxFinal.putImageData(imgData, 0, 0);
         }
 
-        return energyScore
+        // un-smoothed value
+        // return energyScore
+        
+        // smooth using momentum
+        curMoment = ((1-0.9)*energyScore) + (0.9*curMoment)
+        return curMoment
+
     }
 
 }
