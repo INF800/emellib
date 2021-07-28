@@ -1,4 +1,3 @@
-import * as utils from './utils'
 import * as poseDetection from '@tensorflow-models/pose-detection';
 
 export const createDetector = async (videoElement, modelName = 'lightening') => {
