@@ -1,5 +1,13 @@
 import * as poseDetection from '@tensorflow-models/pose-detection';
 
+console.log('LINKED SUCCESSFULLY!!')
+console.log('LINKED SUCCESSFULLY!!')
+console.log('LINKED SUCCESSFULLY!!')
+console.log('LINKED SUCCESSFULLY!!')
+console.log('LINKED SUCCESSFULLY!!')
+console.log('LINKED SUCCESSFULLY!!')
+console.log('LINKED SUCCESSFULLY!!')
+
 export const createDetector = async (videoElement, modelName = 'lightening') => {
     let modelType = null;
     if (modelName === 'thunder') {
