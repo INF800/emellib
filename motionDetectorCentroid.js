@@ -15,10 +15,11 @@ export const createEnergyScoreGetter = (args) => {
     let thresh = args.thresh
     let alpha = args.alpha;
     let _isFirstTimeCall = true
-    let curMoment=0;
+    let curEnergyScore=0;
+    let curCentroid = [0, 0];
     let centroidPrev = [0, 0];
 
-    return (decay=0.1, widthFator=2, areaFilter=0.01) => {
+    return (decay=0.1, widthFator=2, areaFilter=0.01, decayCentroid=0.25) => {
         args.canvasElementHelper.width = args.videoElement.offsetWidth;
         args.canvasElementHelper.height = args.videoElement.offsetHeight;
         const ctx = args.canvasElementHelper.getContext('2d');
@@ -75,27 +76,31 @@ export const createEnergyScoreGetter = (args) => {
         }
 
         // centroid
-        const centroid = [isNaN(sumx/cnt)?(args.canvasElementHelper.width/2):sumx/cnt, 
-                          isNaN(sumy/cnt)?(args.canvasElementHelper.width/2):sumy/cnt] // fight off nan        
+        var intermediateCentroid = [sumx/(cnt+0.000001), sumy/(cnt+0.000001)]
+        curCentroid = [
+            ((1-decayCentroid)*intermediateCentroid[0]) + (decayCentroid*curCentroid[0]),
+            ((1-decayCentroid)*intermediateCentroid[1]) + (decayCentroid*curCentroid[1])
+        ]
         
         if (ctxFinal) {
             ctxFinal.putImageData(imgData, 0, 0);
             ctxFinal.beginPath();
             ctxFinal.fillStyle = "#FF0000";
-            ctxFinal.fillRect(centroid[0], centroid[1], 20, 20);
+            ctxFinal.fillRect(curCentroid[0], curCentroid[1], 20, 20);
             ctxFinal.stroke();
         }
 
-        var dist = utils.euclidean(centroidPrev[0], centroidPrev[1], centroid[0], centroid[1])
-        if (cnt<(areaFilter*args.canvasElementHelper.width*args.canvasElementHelper.height)){
+        var dist = utils.euclidean(centroidPrev[0], centroidPrev[1], curCentroid[0], curCentroid[1])
+        centroidPrev = curCentroid
+        if (cnt<(areaFilter*args.canvasElementHelper.width*args.canvasElementHelper.height)) {
+            console.log("ignoring")
             dist=0
         }
 
-        var energyScore = utils.clamp((dist/(args.canvasElementHelper.width/widthFator))*100 , 0, 100)
-        
-        centroidPrev = centroid
-        curMoment = ((1-decay)*energyScore) + (decay*curMoment)
-        return curMoment
+        var intermediateEnergyScore = utils.clamp((dist/(args.canvasElementHelper.width/widthFator))*100 , 0, 100)
+        curEnergyScore = ((1-decay)*intermediateEnergyScore) + (decay*curEnergyScore)
+
+        return curEnergyScore
     }
 
 }
