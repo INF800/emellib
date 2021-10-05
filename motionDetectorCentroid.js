@@ -19,7 +19,9 @@ export const createEnergyScoreGetter = (args) => {
     let curCentroid = [0, 0];
     let centroidPrev = [0, 0];
 
-    return (decay=0.1, widthFator=2, areaFilter=0.01, decayCentroid=0.25) => {
+    return (decay=0.1, widthFator=2, areaFilter=0.01, decayCentroid=0.25,
+            horizontalWeight=1, verticalWeight=1) => {
+        
         args.canvasElementHelper.width = args.videoElement.offsetWidth;
         args.canvasElementHelper.height = args.videoElement.offsetHeight;
         const ctx = args.canvasElementHelper.getContext('2d');
@@ -90,7 +92,7 @@ export const createEnergyScoreGetter = (args) => {
             ctxFinal.stroke();
         }
 
-        var dist = utils.euclidean(centroidPrev[0], centroidPrev[1], curCentroid[0], curCentroid[1])
+        var dist = utils.euclidean(centroidPrev[0], centroidPrev[1], curCentroid[0], curCentroid[1], horizontalWeight, verticalWeight);
         centroidPrev = curCentroid
         if (cnt<(areaFilter*args.canvasElementHelper.width*args.canvasElementHelper.height)) {
             console.log("ignoring")
